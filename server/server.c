@@ -6,11 +6,11 @@
 /*   By: alel-you <alel-you@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:30:12 by alel-you          #+#    #+#             */
-/*   Updated: 2025/03/12 18:08:09 by alel-you         ###   ########.fr       */
+/*   Updated: 2025/03/16 04:16:33 by alel-you         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
 void signal_handler(int signum)
 {
@@ -37,12 +37,12 @@ void signal_handler(int signum)
 
 int main()
 {
-    printf("PID: %d\n", getpid());
-    signal(SIGUSR1, signal_handler);
-    signal(SIGUSR2, signal_handler);
-    while (1)
-    {
-        pause();
+    ft_putstr_fd("PID: ", 1);
+    ft_putnbr_fd(getpid(), 1);
+    ft_putchar_fd('\n', 1);
+    while (1){
+        signal(SIGUSR1, signal_handler);
+        signal(SIGUSR2, signal_handler);
+        signal(SIGINT, signal_handler);  
     }
-    
 }

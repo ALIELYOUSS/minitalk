@@ -6,7 +6,7 @@
 /*   By: alel-you <alel-you@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:28:09 by alel-you          #+#    #+#             */
-/*   Updated: 2025/03/12 16:46:27 by alel-you         ###   ########.fr       */
+/*   Updated: 2025/03/15 00:58:47 by alel-you         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,9 @@
 # include <stdio.h>
 # include <signal.h>
 # include <stdlib.h>
-int ft_atoi(char const *str);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putchar_fd(char c, int fd);
+int	    ft_strlen(char *str);
+int     ft_atoi(char const *str);
 #endif

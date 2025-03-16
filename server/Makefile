@@ -5,21 +5,33 @@
 #                                                     +:+ +:+         +:+      #
 #    By: alel-you <alel-you@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/03/15 03:09:06 by alel-you          #+#    #+#              #
-#    Updated: 2025/03/15 03:12:30 by alel-you         ###   ########.fr        #
+#    Created: 2025/03/12 22:50:55 by alel-you          #+#    #+#              #
+#    Updated: 2025/03/15 03:15:34 by alel-you         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-all:
-	@make -C ./server
-	@make -C ./client
+FILES = server.c ../help_utils.c
+
+OBJC = $(FILES:.c=.o)
+
+CC = cc
+
+FLAGS = -Wall -Wextra -Werror
+
+NAME = server
+
+all: $(NAME)
+
+%.o: %.c ../minitalk.h
+	@$(CC) $(FLAGS) -c $< -o $@
+	
+$(NAME): $(OBJC)
+	@$(CC) $(OBJC) $(FLAGS) -o $(NAME)
 
 clean:
-	@make clean -C ./server
-	@make clean -C ./client
+	@rm -rf $(OBJC)
 
-re:
-	@make re -C ./server
-	@make re -C ./client
+fclean: clean
+	@rm -rf $(NAME)
 
-fclean: clean re
+re: fclean all
