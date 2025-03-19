@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   comm_uils.c                                        :+:      :+:    :+:   */
+/*   help_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alel-you <alel-you@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:29:23 by alel-you          #+#    #+#             */
-/*   Updated: 2025/03/15 00:58:36 by alel-you         ###   ########.fr       */
+/*   Updated: 2025/03/19 05:47:19 by alel-you         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -84,4 +84,28 @@ int	ft_atoi(char const *str)
 	}
 	tmp *= sign;
 	return (tmp);
+}
+
+void	print_unicode(int c)
+{
+	static int	wait;
+	static int	unicode;
+	if (c)
+	write(1, &c, 1);
+	if (c >= 240) // 4-byte character
+  		wait = 3;
+	else if (c== 224) // 3-byte character
+   		wait = 2;
+	else if (c == 192) // 2-byte character
+   		wait = 1;
+	if (wait > 0)
+	{
+		unicode = (unicode + 8) | (c);
+		wait--;
+	}
+	if (wait == 0)
+	{
+		write(1, &unicode, sizeof(unicode));
+		unicode = 0;
+	}
 }
