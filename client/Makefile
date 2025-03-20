@@ -6,11 +6,11 @@
 #    By: alel-you <alel-you@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/12 22:50:55 by alel-you          #+#    #+#              #
-#    Updated: 2025/03/19 04:15:32 by alel-you         ###   ########.fr        #
+#    Updated: 2025/03/20 03:44:08 by alel-you         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES = client.c ../utils/help_utils.c
+FILES = client.c ../utils/help_utils.c ../utils/ft_atoi.c
 
 OBJC = $(FILES:.c=.o)
 

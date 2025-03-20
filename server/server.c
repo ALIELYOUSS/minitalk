@@ -6,17 +6,32 @@
 /*   By: alel-you <alel-you@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 15:30:12 by alel-you          #+#    #+#             */
-/*   Updated: 2025/03/19 23:14:49 by alel-you         ###   ########.fr       */
+/*   Updated: 2025/03/20 03:37:59 by alel-you         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
+int	help_handler(unsigned char *c, int signum)
+{
+	if (signum == SIGUSR1)
+	{
+		*c = (*c << 1) | 1;
+		return (1);
+	}
+	if (signum == SIGUSR2)
+	{
+		*c = (*c << 1) | (0);
+		return (1);
+	}
+	return (0);
+}
+
 void	handler(int signum, siginfo_t *info, void *none)
 {
-	static unsigned int	c;
-	static int			bits;
-	static int			pre;
+	static unsigned char	c;
+	static int				bits;
+	static int				pre;
 
 	(void)none;
 	if (signum == SIGINT)
@@ -30,16 +45,8 @@ void	handler(int signum, siginfo_t *info, void *none)
 		bits = 0;
 	}
 	pre = info->si_pid;
-	if (signum == SIGUSR1)
-	{
-		c = (c << 1) | 1;
+	if (help_handler(&c, signum) != 0)
 		bits++;
-	}
-	if (signum == SIGUSR2)
-	{
-		c = (c << 1) | (0);
-		bits++;
-	}
 	if (bits == 8)
 	{
 		write(1, &c, 1);
