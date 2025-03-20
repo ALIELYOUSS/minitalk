@@ -1,4 +1,0 @@
-character >= 240 unicode has 4  bytes
-character >= 224 unicode has 3 bytes
-character >= 192 unicode has 2  bytes
-character <127 unicode has 1  bytes normal character
